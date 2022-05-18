@@ -1,0 +1,68 @@
+package com.test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebDriver;
+
+public class ZenGo {
+    WebDriver driver;
+
+
+
+    public void launchbrowser() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "C:\\automation\\drivers\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get("https://www.zengo.com");
+        driver.manage().window().maximize();
+        String title = driver.getTitle();
+        if(title.endsWith("Wallet App"))
+            System.out.println("site is displayed successfully");
+        else
+            System.out.println("site is not displayed successfully");
+        Thread.sleep(2000);
+
+    }
+
+
+    public void findBuy() throws InterruptedException {
+        Thread.sleep(2500);
+        driver.findElement(By.id("menu-item-13191")).click();
+        driver.findElement(By.id("menu-item-10474")).click();
+
+    }
+
+    public void checkBuy() throws InterruptedException {
+        Thread.sleep(6000);
+        String url = driver.getCurrentUrl();
+        if(url.contains("zengowallet.banxa.com/"))
+            System.out.println("Were at the right URL");
+        else
+            System.out.println("Were not at the right URL");
+       // Boolean display = driver.findElement(By.xpath("https://btc-storage-syd-p1-ap-southeast-2-branding-files.s3.ap-southeast-2.amazonaws.com/ZENGOWEB/logo/M8BBuMvyNP1RKDZAFfadxXzV0Rui1JCPC0zoi0v9.png")).isDisplayed();
+        //if(display)
+       //     System.out.println("The logo is display");
+        //else
+          //  System.out.println("The logo is not display");
+        Thread.sleep(2000);
+    }
+
+    public void goHome() throws InterruptedException {
+        String homePage = "https://www.zengo.com";
+        driver.get(homePage);
+        Thread.sleep(6000);
+    }
+    public void quit() throws InterruptedException {
+        Thread.sleep(8000);
+        driver.quit();
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        // TODO Auto-generated method stub
+        ZenGo obj = new ZenGo();
+        obj.launchbrowser();
+        obj.findBuy();
+        obj.checkBuy();
+        obj.goHome();
+        obj.quit();
+    }
+
+}
